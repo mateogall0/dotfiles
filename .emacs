@@ -233,3 +233,5 @@ t
 (set-face-foreground 'font-lock-type-face "#88FF88")    ;; soft green types
 (set-face-foreground 'font-lock-constant-face "#FFAA00") ;; orange constants
 (set-face-background 'hl-line "#222200") 
+
+(add-hook 'dired-mode-hook #'auto-revert-mode)
