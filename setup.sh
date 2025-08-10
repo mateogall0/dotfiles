@@ -12,10 +12,12 @@ copyFile() {
     echo "[COPY] $src -> $dest"
 }
 
-# List your files here as "source_in_repo destination_in_home"
 files=(
     ".config/nvim/init.lua .config/nvim/init.lua"
-    # Add more files here if needed
+    ".config/kitty/kitty.conf .config/kitty/kitty.conf"
+    ".bashrc .bashrc"
+    ".tmux.conf .tmux.conf"
+    ".emacs .emacs"
 )
 
 for file_pair in "${files[@]}"; do
