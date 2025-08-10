@@ -224,7 +224,6 @@ t
 (set-face-background 'mode-line-inactive "#003300")    ;; darker green inactive mode line bg
 (set-face-foreground 'mode-line-inactive "#557755")    ;; muted green inactive fg
 
-;; Syntax highlighting examples
 (set-face-foreground 'font-lock-comment-face "#55AA55")  ;; green comments
 (set-face-foreground 'font-lock-string-face "#FF5555")   ;; red strings
 (set-face-foreground 'font-lock-keyword-face "#FFFF55")  ;; yellow keywords
@@ -234,4 +233,8 @@ t
 (set-face-foreground 'font-lock-constant-face "#FFAA00") ;; orange constants
 (set-face-background 'hl-line "#222200") 
 
+;; dired auto-update
 (add-hook 'dired-mode-hook #'auto-revert-mode)
+
+;; set dired flags
+(setq dired-listing-switches "-alh --group-directories-first")
