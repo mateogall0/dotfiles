@@ -127,12 +127,19 @@
          (dart-mode . lsp)
          (js-mode . lsp)
          (typescript-mode . lsp))
+         (dart-mode . lsp)
   :commands lsp)
 
 ;; company-mode for autocompletion
 (use-package company
   :ensure t
   :hook (after-init . global-company-mode))
+
+(use-package dart-mode
+  :ensure t
+  :hook (dart-mode . lsp)
+  :config
+  (setq dart-format-on-save t)) 
 
 ;; Indentation and tab settings per language
 (add-hook 'python-mode-hook
@@ -231,7 +238,7 @@ t
 (set-face-foreground 'font-lock-variable-name-face "#AAFFAA") ;; light green vars
 (set-face-foreground 'font-lock-type-face "#88FF88")    ;; soft green types
 (set-face-foreground 'font-lock-constant-face "#FFAA00") ;; orange constants
-(set-face-background 'hl-line "#222200") 
+(set-face-background 'hl-line "#222222")
 
 ;; dired auto-update
 (add-hook 'dired-mode-hook #'auto-revert-mode)

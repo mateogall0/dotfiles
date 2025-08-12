@@ -146,3 +146,9 @@ unset __conda_setup
 
 # emacs console-only
 alias emacs="emacs -nw"
+
+# android studio
+export ANDROID_HOME=/home/mateo/Android/Sdk
+export PATH=$ANDROID_HOME/platform-tools:$PATH
+export PATH=$PATH:$HOME/Android/Sdk/cmdline-tools/latest/bin
+export ANDROID_SDK_ROOT=$HOME/Android/Sdk
