@@ -146,10 +146,16 @@
           (lambda () (setq tab-width 4 indent-tabs-mode nil)))
 
 (add-hook 'c-mode-hook
-          (lambda () (setq c-basic-offset 4 tab-width 4 indent-tabs-mode t)))
+          (lambda ()
+            (setq c-basic-offset 4
+                  tab-width 4
+                  indent-tabs-mode t)))
 
 (add-hook 'c++-mode-hook
-          (lambda () (setq c-basic-offset 4 tab-width 4 indent-tabs-mode t)))
+          (lambda ()
+            (setq c-basic-offset 4
+                  tab-width 4
+                  indent-tabs-mode t)))
 
 (add-hook 'rust-mode-hook
           (lambda () (setq tab-width 4 indent-tabs-mode nil)))
@@ -245,3 +251,17 @@ t
 
 ;; set dired flags
 (setq dired-listing-switches "-alh --group-directories-first")
+
+(defun reload-init-file ()
+  "Reload Emacs init file."
+  (interactive)
+  (load-file user-init-file))
+
+
+(global-set-key (kbd "C-c r") 'reload-init-file)
+
+(global-set-key (kbd "<backtab>") 'indent-rigidly-left-to-tab-stop)
+(global-set-key (kbd "TAB") 'indent-rigidly-right-to-tab-stop)
+
+
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
