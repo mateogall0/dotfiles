@@ -139,11 +139,11 @@
   :ensure t
   :hook (dart-mode . lsp)
   :config
-  (setq dart-format-on-save t)) 
+  (setq dart-format-on-save t))
 
 ;; Indentation and tab settings per language
 (add-hook 'python-mode-hook
-          (lambda () (setq tab-width 4 indent-tabs-mode nil)))
+          (lambda () (setq tab-width 4 indent-tabs-mode t)))
 
 (add-hook 'c-mode-hook
           (lambda ()
@@ -158,16 +158,16 @@
                   indent-tabs-mode t)))
 
 (add-hook 'rust-mode-hook
-          (lambda () (setq tab-width 4 indent-tabs-mode nil)))
+          (lambda () (setq tab-width 4 indent-tabs-mode t)))
 
 (add-hook 'dart-mode-hook
-          (lambda () (setq tab-width 2 indent-tabs-mode nil)))
+          (lambda () (setq tab-width 2 indent-tabs-mode t)))
 
 (add-hook 'js-mode-hook
-          (lambda () (setq tab-width 2 indent-tabs-mode nil)))
+          (lambda () (setq tab-width 2 indent-tabs-mode t)))
 
 (add-hook 'typescript-mode-hook
-          (lambda () (setq tab-width 2 indent-tabs-mode nil)))
+          (lambda () (setq tab-width 2 indent-tabs-mode t)))
 
 
 ;; line and tag indications
@@ -265,3 +265,6 @@ t
 
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+;; hide upper bar
+(menu-bar-mode -1)
