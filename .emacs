@@ -118,28 +118,25 @@
   (require 'use-package))
 
 ;; lsp-mode for language server support
-(use-package lsp-mode
-  :ensure t
-  :hook ((python-mode . lsp)
-         (c-mode . lsp)
-         (c++-mode . lsp)
-         (rust-mode . lsp)
-         (dart-mode . lsp)
-         (js-mode . lsp)
-         (typescript-mode . lsp))
-         (dart-mode . lsp)
-  :commands lsp)
 
-;; company-mode for autocompletion
-(use-package company
-  :ensure t
-  :hook (after-init . global-company-mode))
+(unless (package-installed-p 'lsp-ui)
+  (package-refresh-contents)
+  (package-install 'lsp-ui))
+(require 'lsp-mode)
+(setq lsp-keymap-prefix "C-c l") ;; Optional prefix
+(dolist (hook '(python-mode-hook
+                c-mode-hook
+                c++-mode-hook
+                go-mode-hook
+                rust-mode-hook
+                typescript-mode-hook
+                js-mode-hook
+                dart-mode-hook))
+  (add-hook hook 'lsp))
 
-(use-package dart-mode
-  :ensure t
-  :hook (dart-mode . lsp)
-  :config
-  (setq dart-format-on-save t))
+(require 'lsp-ui)
+(add-hook 'lsp-mode-hook 'lsp-ui-mode)
+
 
 ;; Indentation and tab settings per language
 (add-hook 'python-mode-hook
@@ -170,6 +167,17 @@
           (lambda () (setq tab-width 2 indent-tabs-mode t)))
 
 
+;; company-mode for autocompletion
+(use-package company
+  :ensure t
+  :hook (after-init . global-company-mode))
+
+(use-package dart-mode
+  :ensure t
+  :hook (dart-mode . lsp)
+  :config
+  (setq dart-format-on-save t))
+
 ;; line and tag indications
 (which-function-mode 1)
 (add-hook 'prog-mode-hook #'lsp-headerline-breadcrumb-mode)
@@ -183,7 +191,10 @@ t
   (setq imenu-list-auto-resize t)
   (setq imenu-list-smart-toggle t)
   :bind ("C-' i" . imenu-list-smart-toggle))
+(setq company-backends '((company-capf company-dabbrev-code company-files)))
 
+
+;; hl
 (global-hl-line-mode 1)
 
 
@@ -199,8 +210,6 @@ t
 (global-set-key (kbd "C-c <up>") 'windmove-up)
 (global-set-key (kbd "C-c <right>") 'windmove-right)
 
-;; tabs
-(tab-bar-mode 1)
 
 (require 'ansi-color)
 
@@ -246,6 +255,17 @@ t
 (set-face-foreground 'font-lock-constant-face "#FFAA00") ;; orange constants
 (set-face-background 'hl-line "#222222")
 
+;; Customize faces
+(set-face-attribute 'line-number nil
+                    :foreground "#777777"  ;; relative line numbers
+                    :background nil)
+
+(set-face-attribute 'line-number-current-line nil
+                    :foreground "#FFFFFF"     ;; current line number
+                    :background nil
+                    :weight 'bold)
+
+
 ;; dired auto-update
 (add-hook 'dired-mode-hook #'auto-revert-mode)
 
@@ -268,3 +288,84 @@ t
 
 ;; hide upper bar
 (menu-bar-mode -1)
+
+
+(unless (package-installed-p 'which-key)
+  (package-install 'which-key))
+
+;; Enable
+(require 'which-key)
+(which-key-mode)
+(setq which-key-idle-delay 0.3)  ;; Show quickly
+
+
+(unless (package-installed-p 'goto-last-change)
+  (package-install 'goto-last-change))
+
+(require 'goto-last-change)
+(global-set-key (kbd "C-x C-/") 'goto-last-change)
+(global-set-key (kbd "C-x C-_") 'goto-last-change-back)
+
+
+(unless (package-installed-p 'orderless)
+  (package-install 'orderless))
+
+(require 'orderless)
+(setq completion-styles '(orderless)
+      completion-category-defaults nil
+      completion-category-overrides '((file (styles partial-completion))))
+
+
+;; git
+(unless (package-installed-p 'magit)
+  (package-refresh-contents)
+  (package-install 'magit))
+(require 'magit)
+(global-set-key (kbd "C-x g") 'magit-status)
+(unless (package-installed-p 'diff-hl)
+  (package-refresh-contents)
+  (package-install 'diff-hl))
+(require 'diff-hl)
+(global-diff-hl-mode)
+(diff-hl-flydiff-mode)
+(add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+
+
+;; Eglot as LSP client
+(use-package eglot
+  :ensure t
+  :hook ((python-mode
+          c-mode
+          c++-mode
+          rust-mode
+          go-mode
+          typescript-mode
+          js-mode
+          dart-mode) . eglot-ensure))
+
+;; Corfu for VSCode-style completions
+(use-package corfu
+  :ensure t
+  :init
+  (global-corfu-mode))
+
+(use-package cape
+  :ensure t)
+
+;; Icons in completion popup
+(use-package kind-icon
+  :ensure t
+  :after corfu
+  :custom
+  (kind-icon-default-face 'corfu-default))
+
+;; Yasnippet for snippet expansions
+(use-package yasnippet
+  :ensure t
+  :init
+  (yas-global-mode 1))
+
+;; Optional company-box for LSP popups (classic style)
+(use-package company-box
+  :ensure t
+  :hook (company-mode . company-box-mode))
