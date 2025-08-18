@@ -138,7 +138,7 @@
 (add-hook 'lsp-mode-hook 'lsp-ui-mode)
 
 
-;; Indentation and tab settings per language
+;; ;; Indentation and tab settings per language
 (add-hook 'python-mode-hook
           (lambda () (setq tab-width 4 indent-tabs-mode t)))
 
