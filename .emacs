@@ -137,36 +137,6 @@
 (require 'lsp-ui)
 (add-hook 'lsp-mode-hook 'lsp-ui-mode)
 
-
-;; ;; Indentation and tab settings per language
-(add-hook 'python-mode-hook
-          (lambda () (setq tab-width 4 indent-tabs-mode t)))
-
-(add-hook 'c-mode-hook
-          (lambda ()
-            (setq c-basic-offset 4
-                  tab-width 4
-                  indent-tabs-mode t)))
-
-(add-hook 'c++-mode-hook
-          (lambda ()
-            (setq c-basic-offset 4
-                  tab-width 4
-                  indent-tabs-mode t)))
-
-(add-hook 'rust-mode-hook
-          (lambda () (setq tab-width 4 indent-tabs-mode t)))
-
-(add-hook 'dart-mode-hook
-          (lambda () (setq tab-width 2 indent-tabs-mode t)))
-
-(add-hook 'js-mode-hook
-          (lambda () (setq tab-width 2 indent-tabs-mode t)))
-
-(add-hook 'typescript-mode-hook
-          (lambda () (setq tab-width 2 indent-tabs-mode t)))
-
-
 ;; company-mode for autocompletion
 (use-package company
   :ensure t
@@ -369,3 +339,10 @@ t
 (use-package company-box
   :ensure t
   :hook (company-mode . company-box-mode))
+
+;; Enable whitespace-mode with tab highlighting
+(setq whitespace-style '(face tabs))
+(global-whitespace-mode 1)
+
+(custom-set-faces
+ '(whitespace-tab ((t (:background "#222222")))))
