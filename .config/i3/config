@@ -193,3 +193,8 @@ bar {
 # Switch workspace with PageUp/PageDown
 bindsym $mod+Next workspace next; nop
 bindsym $mod+Prior workspace prev; nop
+
+
+# Set screen blanking & DPMS to 30 minutes
+exec --no-startup-id xset s 1800 1800
+exec --no-startup-id xset dpms 1800 1800 1800
