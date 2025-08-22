@@ -313,6 +313,23 @@ t
           js-mode
           dart-mode) . eglot-ensure))
 
+(defun my-python-indentation ()
+  "Set Python indentation to 4 spaces."
+  (setq-local python-indent-offset 4
+              indent-tabs-mode nil))
+
+(defun my-js-indentation ()
+  "Set JavaScript indentation to 2 spaces."
+  (setq-local js-indent-level 2
+              tab-width 2
+              indent-tabs-mode nil))
+
+(add-hook 'dart-mode-hook 'my-js-indentation)
+(add-hook 'js-mode-hook 'my-js-indentation)
+(add-hook 'js2-mode-hook 'my-js-indentation)
+(add-hook 'typescript-mode-hook 'my-ts-indentation)
+(add-hook 'python-mode-hook 'my-python-indentation)
+
 ;; Corfu for VSCode-style completions
 (use-package corfu
   :ensure t
