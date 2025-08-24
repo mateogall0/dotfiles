@@ -317,11 +317,19 @@ t
               tab-width 2
               indent-tabs-mode nil))
 
+(defun my-c-indentation ()
+  "Set C/C++ indentation"
+  (setq-local c-basic-offset 8
+              tab-width 8
+              indent-tabs-mode t))
+
 (add-hook 'dart-mode-hook 'my-js-indentation)
 (add-hook 'js-mode-hook 'my-js-indentation)
 (add-hook 'js2-mode-hook 'my-js-indentation)
 (add-hook 'typescript-mode-hook 'my-ts-indentation)
 (add-hook 'python-mode-hook 'my-python-indentation)
+(add-hook 'c-mode-hook 'my-c-indentation)
+(add-hook 'cpp-mode-hook 'my-c-indentation)
 
 ;; Corfu for VSCode-style completions
 (use-package corfu
