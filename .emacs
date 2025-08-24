@@ -194,16 +194,9 @@ t
 
 
 ;; Full colors
-;; Frame colors (default for new frames)
-(add-to-list 'default-frame-alist '(foreground-color . "#FFFFFF")) ;; white text
-(add-to-list 'default-frame-alist '(background-color . "#000000")) ;; black background
-(add-to-list 'default-frame-alist '(cursor-color . "#FFFF00"))     ;; bright yellow cursor
-(add-to-list 'default-frame-alist '(mouse-color . "#00FF00"))      ;; bright green mouse pointer
-(add-to-list 'default-frame-alist '(border-color . "#0044AA"))     ;; blueish border
-
 ;; Face customizations
 (set-face-foreground 'default "#FFFFFF")              ;; normal text white
-(set-face-background 'default "#000000")              ;; black background
+(set-face-background 'default "#1F1F1F")
 
 (set-face-background 'region "#444400")                ;; dark yellow-green selection background
 (set-face-foreground 'region "#FFFFAA")                ;; pale yellow selection text
@@ -217,13 +210,13 @@ t
 (set-face-foreground 'mode-line-inactive "#557755")    ;; muted green inactive fg
 
 (set-face-foreground 'font-lock-comment-face "#55AA55")  ;; green comments
-(set-face-foreground 'font-lock-string-face "#FF5555")   ;; red strings
+(set-face-foreground 'font-lock-string-face "#BD6111")
 (set-face-foreground 'font-lock-keyword-face "#FFFF55")  ;; yellow keywords
 (set-face-foreground 'font-lock-function-name-face "#5599FF") ;; blue function names
-(set-face-foreground 'font-lock-variable-name-face "#AAFFAA") ;; light green vars
+(set-face-foreground 'font-lock-variable-name-face "#66CCCC")
 (set-face-foreground 'font-lock-type-face "#88FF88")    ;; soft green types
 (set-face-foreground 'font-lock-constant-face "#FFAA00") ;; orange constants
-(set-face-background 'hl-line "#222222")
+(set-face-background 'hl-line "#303030")
 
 ;; Customize faces
 (set-face-attribute 'line-number nil
@@ -231,7 +224,7 @@ t
                     :background nil)
 
 (set-face-attribute 'line-number-current-line nil
-                    :foreground "#FFFFFF"     ;; current line number
+                    :foreground "#B3CC00"     ;; current line number
                     :background nil
                     :weight 'bold)
 
@@ -362,4 +355,4 @@ t
 (global-whitespace-mode 1)
 
 (custom-set-faces
- '(whitespace-tab ((t (:background "#222222")))))
+ '(whitespace-tab ((t (:background "#3E402E")))))
