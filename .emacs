@@ -117,40 +117,11 @@
 (eval-when-compile
   (require 'use-package))
 
-;; lsp-mode for language server support
-
-;; (unless (package-installed-p 'lsp-ui)
-;;   (package-refresh-contents)
-;;   (package-install 'lsp-ui))
-;; (require 'lsp-mode)
-;; (setq lsp-keymap-prefix "C-c l") ;; Optional prefix
-;; (dolist (hook '(python-mode-hook
-;;                 c-mode-hook
-;;                 c++-mode-hook
-;;                 go-mode-hook
-;;                 rust-mode-hook
-;;                 typescript-mode-hook
-;;                 js-mode-hook
-;;                 dart-mode-hook))
-;;   (add-hook hook 'lsp))
-
-;; (require 'lsp-ui)
-;; (add-hook 'lsp-mode-hook 'lsp-ui-mode)
-
-;; company-mode for autocompletion
 (use-package company
   :ensure t
   :hook (after-init . global-company-mode))
 
-;; (use-package dart-mode
-;;   :ensure t
-;;   :hook (dart-mode . lsp)
-;;   :config
-;;   (setq dart-format-on-save t))
-
-;; line and tag indications
 (which-function-mode 1)
-;; (add-hook 'prog-mode-hook #'lsp-headerline-breadcrumb-mode)
 t
 (semantic-mode 1)
 
@@ -328,8 +299,8 @@ t
 (add-hook 'js2-mode-hook 'my-js-indentation)
 (add-hook 'typescript-mode-hook 'my-ts-indentation)
 (add-hook 'python-mode-hook 'my-python-indentation)
-;; (add-hook 'c-mode-hook 'my-c-indentation)
-;; (add-hook 'cpp-mode-hook 'my-c-indentation)
+(add-hook 'c-mode-hook 'my-c-indentation)
+(add-hook 'cpp-mode-hook 'my-c-indentation)
 
 ;; Corfu for VSCode-style completions
 (use-package corfu
