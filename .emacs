@@ -319,9 +319,9 @@ t
 
 (defun my-c-indentation ()
   "Set C/C++ indentation"
-  (setq-local c-basic-offset 8
-              tab-width 8
-              indent-tabs-mode t))
+  (setq-local c-basic-offset 4
+              tab-width 4
+              indent-tabs-mode nil))
 
 (add-hook 'dart-mode-hook 'my-js-indentation)
 (add-hook 'js-mode-hook 'my-js-indentation)
