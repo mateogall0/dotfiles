@@ -173,6 +173,7 @@ t
 (set-face-foreground 'region "#FFFFAA")                ;; pale yellow selection text
 
 (set-face-foreground 'cursor "#FFFF00")                ;; bright yellow cursor
+(set-cursor-color "#FFFF00")
 
 ;; Mode line
 (set-face-background 'mode-line "#005500")             ;; dark green mode line bg
@@ -335,3 +336,7 @@ t
 
 (custom-set-faces
  '(whitespace-tab ((t (:background "#3E402E")))))
+
+(setq make-backup-files nil)   ;; no ~ backups
+(setq auto-save-default nil)   ;; no #autosaves#
+(setq create-lockfiles nil)    ;; no .# lockfiles
