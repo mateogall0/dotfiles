@@ -340,3 +340,6 @@ t
 (setq make-backup-files nil)   ;; no ~ backups
 (setq auto-save-default nil)   ;; no #autosaves#
 (setq create-lockfiles nil)    ;; no .# lockfiles
+
+;; display column number
+(column-number-mode 1)
