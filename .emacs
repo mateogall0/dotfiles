@@ -343,3 +343,14 @@ t
 
 ;; display column number
 (column-number-mode 1)
+
+;; Reuse the same buffer for Dired
+(put 'dired-find-alternate-file 'disabled nil)
+
+(defun my-dired-mode-setup ()
+  ;; Enable 'a' to reuse buffer
+  (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
+  (define-key dired-mode-map (kbd "^")
+    (lambda () (interactive) (find-alternate-file ".."))))
+
+(add-hook 'dired-mode-hook 'my-dired-mode-setup)
