@@ -165,7 +165,7 @@ t
 
 
 ;; Full colors
-;; Face customizations
+;; ;; Face customizations
 (set-face-foreground 'default "#FFFFFF")              ;; normal text white
 (set-face-background 'default "#1F1F1F")
 
@@ -199,6 +199,7 @@ t
                     :foreground "#B3CC00"     ;; current line number
                     :background nil
                     :weight 'bold)
+
 
 
 ;; dired auto-update
@@ -280,12 +281,15 @@ t
 
 (defun my-python-indentation ()
   "Set Python indentation to 4 spaces."
-  (setq-local python-indent-offset 4
+  (setq-local python-basic-offset 4
+              python-indent-offset 4
+	      tab-width 4
               indent-tabs-mode nil))
 
 (defun my-js-indentation ()
   "Set JavaScript indentation to 2 spaces."
-  (setq-local js-indent-level 2
+  (setq-local js-basic-offset 2
+              js-indent-level 2
               tab-width 2
               indent-tabs-mode nil))
 
@@ -354,3 +358,37 @@ t
     (lambda () (interactive) (find-alternate-file ".."))))
 
 (add-hook 'dired-mode-hook 'my-dired-mode-setup)
+
+(defun my-magit-status-fullframe ()
+  "Open Magit status in a new tab, fully focused, ignoring other windows."
+  (interactive)
+  (let ((dir (or (magit-toplevel)
+                 (read-directory-name "Magit status for directory: "))))
+    ;; Open a new tab
+    (tab-new)
+    ;; Delete any other windows in this tab
+    (delete-other-windows)
+    ;; Open Magit in this window only
+    (let ((magit-display-buffer-function
+           #'magit-display-buffer-same-window-except-diff-v1))
+      (magit-status dir))))
+
+(global-set-key (kbd "C-x g") #'my-magit-status-fullframe)
+
+(defvar my/emacs-root-directory default-directory
+  "The directory where Emacs was started. Used as the root for compilation or async commands.")
+
+(defun my/async-shell-command-root (command)
+  "Run an async shell COMMAND from Emacs root directory."
+  (interactive
+   (list (read-shell-command "Async shell command: ")))
+  (let ((default-directory my/emacs-root-directory))
+    (async-shell-command command)))
+
+(global-set-key (kbd "M-!") #'my/async-shell-command-root)
+
+(defun my/set-emacs-root-to-current-directory ()
+  "Set `my/emacs-root-directory` to the directory of the current buffer."
+  (interactive)
+  (setq my/emacs-root-directory default-directory)
+  (message "Emacs root directory set to: %s" my/emacs-root-directory))

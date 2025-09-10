@@ -198,3 +198,6 @@ bindsym $mod+Prior workspace prev; nop
 # Set screen blanking & DPMS to 30 minutes
 exec --no-startup-id xset s 1800 1800
 exec --no-startup-id xset dpms 1800 1800 1800
+
+# remove borders
+hide_edge_borders both
