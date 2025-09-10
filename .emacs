@@ -378,12 +378,29 @@ t
 (defvar my/emacs-root-directory default-directory
   "The directory where Emacs was started. Used as the root for compilation or async commands.")
 
+(require 'ansi-color)
+
 (defun my/async-shell-command-root (command)
-  "Run an async shell COMMAND from Emacs root directory."
+  "Run an async shell COMMAND from Emacs root directory and echo its exit code in color."
   (interactive
    (list (read-shell-command "Async shell command: ")))
-  (let ((default-directory my/emacs-root-directory))
-    (async-shell-command command)))
+  (let* ((default-directory my/emacs-root-directory)
+         (buffer-name "*Async Shell Command*")
+         (full-command (concat command
+                               "; EXIT_CODE=$?;"
+                               " if [ $EXIT_CODE -eq 0 ]; then "
+                               "echo -e \"\n[\\033[32mExit $EXIT_CODE\\033[0m\"];"
+                               " else "
+                               "echo -e \"\n[\\033[31mExit $EXIT_CODE\\033[0m\"];"
+                               " fi")))
+    ;; Clear buffer first
+    (with-current-buffer (get-buffer-create buffer-name)
+      (erase-buffer))
+    ;; Run the command
+    (async-shell-command full-command buffer-name buffer-name)
+    ;; Apply ANSI colors after command finishes
+    (with-current-buffer buffer-name
+      (add-hook 'comint-output-filter-functions 'ansi-color-process-output nil t))))
 
 (global-set-key (kbd "M-!") #'my/async-shell-command-root)
 
