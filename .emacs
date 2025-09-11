@@ -274,28 +274,33 @@ t
           js-mode
           dart-mode) . eglot-ensure))
 
-(defun four-space-indentation ()
+(defun my-python-indentation ()
   "Set Python indentation to 4 spaces."
   (setq-local python-basic-offset 4
               python-indent-offset 4
               tab-width 4
               indent-tabs-mode nil))
 
-(defun two-space-indentation ()
+(defun my-js-indentation ()
   "Set JavaScript indentation to 2 spaces."
   (setq-local js-basic-offset 2
               js-indent-level 2
               tab-width 2
               indent-tabs-mode nil))
 
-(add-hook 'dart-mode-hook 'two-space-indentation)
-(add-hook 'js-mode-hook 'two-space-indentation)
-(add-hook 'js2-mode-hook 'two-space-indentation)
-(add-hook 'typescript-mode-hook 'two-space-indentation)
+(defun my-c-indentation ()
+  "Set C/C++ indentation"
+  (setq-local c-basic-offset 4
+              tab-width 4
+              indent-tabs-mode nil))
 
-(add-hook 'python-mode-hook 'four-space-indentation)
-(add-hook 'c-mode-hook 'four-space-indentation)
-(add-hook 'cpp-mode-hook 'four-space-indentation)
+(add-hook 'dart-mode-hook 'my-js-indentation)
+(add-hook 'js-mode-hook 'my-js-indentation)
+(add-hook 'js2-mode-hook 'my-js-indentation)
+(add-hook 'typescript-mode-hook 'my-ts-indentation)
+(add-hook 'python-mode-hook 'my-python-indentation)
+(add-hook 'c-mode-hook 'my-c-indentation)
+(add-hook 'cpp-mode-hook 'my-c-indentation)
 
 ;; Corfu for VSCode-style completions
 (use-package corfu
