@@ -103,7 +103,6 @@
 (global-set-key (kbd "C-c i") 'my-increment-number-at-point)
 (global-set-key (kbd "C-c d") 'my-decrement-number-at-point)
 
-
 ;; Basic package setup and bootstrapping use-package
 (require 'package)
 (setq package-enable-at-startup nil)
@@ -134,10 +133,8 @@ t
   :bind ("C-' i" . imenu-list-smart-toggle))
 (setq company-backends '((company-capf company-dabbrev-code company-files)))
 
-
 ;; hl
 (global-hl-line-mode 1)
-
 
 ;; use system terminal colors
 (unless (display-graphic-p)
@@ -192,12 +189,10 @@ t
 
 ;; Customize faces
 (set-face-attribute 'line-number nil
-                    :foreground "#777777"  ;; relative line numbers
-                    :background nil)
+                    :foreground "#777777")  ;; relative line numbers
 
 (set-face-attribute 'line-number-current-line nil
                     :foreground "#B3CC00"     ;; current line number
-                    :background nil
                     :weight 'bold)
 
 
@@ -279,33 +274,28 @@ t
           js-mode
           dart-mode) . eglot-ensure))
 
-(defun my-python-indentation ()
+(defun four-space-indentation ()
   "Set Python indentation to 4 spaces."
   (setq-local python-basic-offset 4
               python-indent-offset 4
-	      tab-width 4
+              tab-width 4
               indent-tabs-mode nil))
 
-(defun my-js-indentation ()
+(defun two-space-indentation ()
   "Set JavaScript indentation to 2 spaces."
   (setq-local js-basic-offset 2
               js-indent-level 2
               tab-width 2
               indent-tabs-mode nil))
 
-(defun my-c-indentation ()
-  "Set C/C++ indentation"
-  (setq-local c-basic-offset 4
-              tab-width 4
-              indent-tabs-mode nil))
+(add-hook 'dart-mode-hook 'two-space-indentation)
+(add-hook 'js-mode-hook 'two-space-indentation)
+(add-hook 'js2-mode-hook 'two-space-indentation)
+(add-hook 'typescript-mode-hook 'two-space-indentation)
 
-(add-hook 'dart-mode-hook 'my-js-indentation)
-(add-hook 'js-mode-hook 'my-js-indentation)
-(add-hook 'js2-mode-hook 'my-js-indentation)
-(add-hook 'typescript-mode-hook 'my-ts-indentation)
-(add-hook 'python-mode-hook 'my-python-indentation)
-(add-hook 'c-mode-hook 'my-c-indentation)
-(add-hook 'cpp-mode-hook 'my-c-indentation)
+(add-hook 'python-mode-hook 'four-space-indentation)
+(add-hook 'c-mode-hook 'four-space-indentation)
+(add-hook 'cpp-mode-hook 'four-space-indentation)
 
 ;; Corfu for VSCode-style completions
 (use-package corfu
