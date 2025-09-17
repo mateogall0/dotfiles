@@ -70,9 +70,6 @@
 ;; Delete selected when pasting
 (delete-selection-mode 1)
 
-;; Make Ctrl+w always delete previous word (kill word backward)
-(global-set-key (kbd "C-w") 'backward-kill-word)
-
 
 (defun my-increment-number-at-point (arg)
   "Increment number at point by ARG (default 1)."
@@ -404,3 +401,39 @@ t
   (interactive)
   (setq my/emacs-root-directory default-directory)
   (message "Emacs root directory set to: %s" my/emacs-root-directory))
+
+(defun open-file-at-point-line-col ()
+  "Open file at point, jumping to optional line and column like `file:line:col`."
+  (interactive)
+  (let* ((ref (thing-at-point 'filename t))
+         (parts (and ref (split-string ref ":")))
+         (file (car parts))
+         (line (and parts (string-to-number (cadr parts))))
+         (col  (and parts (> (length parts) 2)
+                    (string-to-number (nth 2 parts)))))
+    (if (and file (file-exists-p file))
+        (progn
+          (find-file file)
+          (when line
+            (goto-char (point-min))
+            (forward-line (1- line)))
+          (when col
+            (move-to-column (1- col))))
+      (message "No valid file at point"))))
+
+(global-set-key (kbd "C-c TAB") 'open-file-at-point-line-col)
+
+;; dont unset mark
+(setq kill-do-not-deactivate t)
+(transient-mark-mode 1)
+
+;; Keep region active after copying with M-w
+(defadvice kill-ring-save (after keep-region-active-and-notify activate)
+  "Keep region active and notify after copying."
+  (setq deactivate-mark nil)
+  (message "Copy" ))
+
+(defadvice kill-region (after keep-region-active-and-notify activate)
+  "Keep region active and notify after cutting."
+  (setq deactivate-mark nil)
+  (message "Cut" ))
