@@ -1,0 +1,9 @@
+set number
+set relativenumber
+set termguicolors
+set clipboard=unnamedplus
+set splitbelow
+set splitright
+set scrolloff=7
+set cursorline
+set showmode

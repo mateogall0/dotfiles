@@ -13,6 +13,7 @@ copyFile() {
 }
 
 files=(
+    ".vimrc .vimrc"
     ".config/i3/config .config/i3/config"
     ".config/nvim/init.lua .config/nvim/init.lua"
     ".config/kitty/kitty.conf .config/kitty/kitty.conf"
