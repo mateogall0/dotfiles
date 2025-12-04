@@ -152,3 +152,6 @@ export ANDROID_HOME=/home/mateo/Android/Sdk
 export PATH=$ANDROID_HOME/platform-tools:$PATH
 export PATH=$PATH:$HOME/Android/Sdk/cmdline-tools/latest/bin
 export ANDROID_SDK_ROOT=$HOME/Android/Sdk
+
+# launch the shell with data
+neofetch

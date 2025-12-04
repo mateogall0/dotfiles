@@ -192,6 +192,11 @@ t
                     :foreground "#B3CC00"     ;; current line number
                     :weight 'bold)
 
+;; Customize tab-bar faces
+(custom-set-faces
+ '(tab-bar ((t (:background "gray15" :foreground "white"))))
+ '(tab-bar-tab ((t (:background "SteelBlue4" :foreground "white" :weight bold))))
+ '(tab-bar-tab-inactive ((t (:background "gray30" :foreground "lightgray")))))
 
 
 ;; dired auto-update
@@ -265,11 +270,14 @@ t
   :hook ((python-mode
           c-mode
           c++-mode
+          csharp-mode
           rust-mode
           go-mode
           typescript-mode
           js-mode
-          dart-mode) . eglot-ensure))
+          dart-mode
+          yaml-mode
+          json-mode) . eglot-ensure))
 
 (defun my-python-indentation ()
   "Set Python indentation to 4 spaces."
@@ -291,13 +299,35 @@ t
               tab-width 4
               indent-tabs-mode nil))
 
+(defun my-c++-indentation ()
+  "Set C/C++ indentation"
+  (setq-local c++-basic-offset 4
+              tab-width 4
+              indent-tabs-mode nil))
+
+(defun my-csharp-indentation ()
+  "Set C# indentation to 4 spaces."
+  (setq-local c-basic-offset 4
+              tab-width 4
+              indent-tabs-mode nil))
+
+(defun my-yaml-indentation ()
+  "Set YAML indentation to 2 spaces."
+  (setq-local yaml-indent-offset 2
+              tab-width 2
+              indent-tabs-mode nil))
+
+(add-hook 'yaml-mode-hook 'my-js-indentation)
+(add-hook 'json-mode-hook 'my-js-indentation)
+(add-hook 'csharp-mode-hook 'my-csharp-indentation)
 (add-hook 'dart-mode-hook 'my-js-indentation)
 (add-hook 'js-mode-hook 'my-js-indentation)
 (add-hook 'js2-mode-hook 'my-js-indentation)
 (add-hook 'typescript-mode-hook 'my-ts-indentation)
 (add-hook 'python-mode-hook 'my-python-indentation)
 (add-hook 'c-mode-hook 'my-c-indentation)
-(add-hook 'cpp-mode-hook 'my-c-indentation)
+(add-hook 'cpp-mode-hook 'my-c++-indentation)
+
 
 ;; Corfu for VSCode-style completions
 (use-package corfu
@@ -437,3 +467,5 @@ t
   "Keep region active and notify after cutting."
   (setq deactivate-mark nil)
   (message "Cut" ))
+
+(setq tab-bar-show 1)
