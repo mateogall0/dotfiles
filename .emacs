@@ -301,7 +301,10 @@ t
 
 (defun my-c++-indentation ()
   "Set C/C++ indentation"
-  (setq-local c++-basic-offset 4
+  (setq-local c-basic-offset 4
+              c-basic-offset 4
+	      c-indent-level 4
+	      c-indent-offset 4
               tab-width 4
               indent-tabs-mode nil))
 
@@ -326,7 +329,7 @@ t
 (add-hook 'typescript-mode-hook 'my-ts-indentation)
 (add-hook 'python-mode-hook 'my-python-indentation)
 (add-hook 'c-mode-hook 'my-c-indentation)
-(add-hook 'cpp-mode-hook 'my-c++-indentation)
+(add-hook 'c++-mode-hook 'my-c++-indentation)
 
 
 ;; Corfu for VSCode-style completions
