@@ -153,5 +153,9 @@ export PATH=$ANDROID_HOME/platform-tools:$PATH
 export PATH=$PATH:$HOME/Android/Sdk/cmdline-tools/latest/bin
 export ANDROID_SDK_ROOT=$HOME/Android/Sdk
 
+# ruby
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init - bash)"
+
 # launch the shell with data
 neofetch

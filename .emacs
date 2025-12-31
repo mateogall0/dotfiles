@@ -1,9 +1,8 @@
 (xterm-mouse-mode 1)
 
 ;; Scroll with mouse wheel in terminal
-(global-set-key [mouse-4] (lambda () (interactive) (scroll-down	1)))
+(global-set-key [mouse-4] (lambda () (interactive) (scroll-down 1)))
 (global-set-key [mouse-5] (lambda () (interactive) (scroll-up 1)))
-
 
 ;; Better default settings
 (setq inhibit-startup-screen t)       ;; Skip startup screen
@@ -118,7 +117,7 @@
   :hook (after-init . global-company-mode))
 
 (which-function-mode 1)
-t
+
 (semantic-mode 1)
 
 (use-package imenu-list
@@ -170,8 +169,8 @@ t
 (set-cursor-color "#FFFF00")
 
 ;; Mode line
-(set-face-background 'mode-line "#005500")             ;; dark green mode line bg
-(set-face-foreground 'mode-line "#AAFFAA")             ;; light green mode line fg
+(set-face-background 'mode-line "#2B2B2B")             ;; dark green mode line bg
+(set-face-foreground 'mode-line "#CCCCCC")             ;; light green mode line fg
 (set-face-background 'mode-line-inactive "#003300")    ;; darker green inactive mode line bg
 (set-face-foreground 'mode-line-inactive "#557755")    ;; muted green inactive fg
 
@@ -264,19 +263,7 @@ t
 (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
 
 
-;; Eglot as LSP client
-(use-package eglot
-  :ensure t
-  :hook ((python-mode
-          c-mode
-          c++-mode
-          csharp-mode
-          rust-mode
-          go-mode
-          js-mode
-          dart-mode
-          yaml-mode
-          json-mode) . eglot-ensure))
+
 
 (defun my-python-indentation ()
   "Set Python indentation to 4 spaces."
@@ -476,3 +463,5 @@ t
   (message "Cut" ))
 
 (setq tab-bar-show 1)
+
+(global-whitespace-mode 1)
