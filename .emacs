@@ -465,3 +465,6 @@
 (setq tab-bar-show 1)
 
 (global-whitespace-mode 1)
+
+;; add emacs closure confirmation
+(setq confirm-kill-emacs 'y-or-n-p)
