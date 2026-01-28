@@ -95,38 +95,10 @@ fi
 # flutter and dart
 export PATH="$HOME/flutter/bin:$PATH"
 
-# conda
-# export PATH="$HOME/miniconda3/bin:$PATH"  # commented out by conda initialize
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('$HOME/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "$HOME/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="$HOME/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
 . "$HOME/.cargo/env"
 
 # emacs console-only
 alias emacs="emacs -nw"
-
-# android studio
-export ANDROID_HOME=/home/mateo/Android/Sdk
-export PATH=$ANDROID_HOME/platform-tools:$PATH
-export PATH=$PATH:$HOME/Android/Sdk/cmdline-tools/latest/bin
-export ANDROID_SDK_ROOT=$HOME/Android/Sdk
-
-# ruby
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init - bash)"
 
 # launch the shell with data
 neofetch
